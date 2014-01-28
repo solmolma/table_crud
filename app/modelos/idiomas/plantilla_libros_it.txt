@@ -1,0 +1,17 @@
+Libros Leídos|Leggi Books
+Volver|Torna alla home page
+Ultimos|~~ I miei libri letti ~~
+Title|Biblioteca Marina
+Título|Titolo
+Autor|Autore
+Comentario|Commenta
+Acciones|Share
+Anexar|Aggiunge
+Modificar|Modifica
+Borrar|Chiaro 
+Modificar Libro|Modifica book dati
+Borrar Libro|Chiaro Paper
+Borrar Pregunta|Sei sicuro di voler eliminare questo libro?
+Anexar Libro|Inserisci i dettagli del nuovo libro
+Enviar|Email
+Cancelar|Annulla

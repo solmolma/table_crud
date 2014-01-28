@@ -1,0 +1,17 @@
+Catálogo Crocs|
+Volver|Volver a la página principal
+Title|Crocs
+Ultimos|~~Crocs~~
+Referencia|
+Nombre|
+Precio|
+Acciones|
+Anexar|
+Modificar|
+Borrar|
+Modificar Crocs|Modifica los datos de las crocs
+Borrar Crocs|
+Borrar Pregunta|¿Seguro que quiere borrar estas crocs?
+Anexar Crocs|Introduce los datos de las nuevas crocs
+Enviar|
+Cancelar|

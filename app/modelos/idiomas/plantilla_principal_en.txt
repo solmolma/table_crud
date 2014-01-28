@@ -1,0 +1,14 @@
+Español|Spanish
+Inglés|English
+Francés|French
+Italiano|Italian
+Titulo|Model-View-Controller
+Title|Application Development
+Creado por|Created by
+Contacto|Contact
+Creación|Creation
+Octubre|th October 
+Noviembre|th November 
+Diciembre|th December 
+Última Actualización|Last Upgrade
+Biblioteca|Library

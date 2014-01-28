@@ -1,0 +1,17 @@
+Libros Leídos|Books Read
+Volver|Back to Home Page
+Ultimos|~~My Last Books Read~~
+Title|Marina's Library
+Título|Title
+Autor|Author
+Comentario|Comments
+Acciones|Actions
+Anexar|Append
+Modificar|Modify
+Borrar|Delete
+Modificar Libro|Modifies the data book
+Borrar Libro|Delete Book
+Borrar Pregunta|Are you sure you want to delete this Book?
+Anexar Libro|Enter details of the new book
+Enviar|Send
+Cancelar|Cancel

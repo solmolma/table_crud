@@ -1,0 +1,17 @@
+Libros Leídos|Lisez les livres
+Volver|Retour à la page d'accueil
+Title|Bibliothèque Marina
+Ultimos|~~ Mes derniers livres lus ~~
+Título|Titre
+Autor|Auteur
+Comentario|Commentaire 
+Acciones|Partager 
+Anexar|Ajoute 
+Modificar|Modifier 
+Borrar|Effacer 
+Modificar Libro|Modifier recueil de données
+Effacer Papier|
+Borrar Pregunta|Etes-vous sûr de vouloir supprimer ce livre?
+Anexar Libro|Entrez les détails du nouveau livre
+Enviar|Email 
+Cancelar|Annuler

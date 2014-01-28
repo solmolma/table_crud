@@ -1,0 +1,15 @@
+Español|
+Inglés|
+Francés|
+Italiano|
+Titulo|Modelo-Vista-Controlador
+Title|Desarrollo de Aplicaciones
+Creado por|
+Contacto|
+Creación|
+Enero| de Enero de
+Octubre| de Octubre de
+Noviembre| de Noviembre de
+Diciembre| de Diciembre de
+Última Actualización|
+Biblioteca|
