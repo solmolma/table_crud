@@ -21,8 +21,7 @@ class Validaciones  {
 	private static function request($parametro) {
 		
 //		return self::evitar_inyeccion_sql(array_key_exists($parametro, $_REQUEST) ? $_REQUEST[$parametro] : null);
-                return array_key_exists($parametro, $_REQUEST) ? $_REQUEST[$parametro] : null;
-		
+		return array_key_exists($parametro, $_REQUEST) ? $_REQUEST[$parametro] : null;
 	}
 	
 	
@@ -321,6 +320,39 @@ class Validaciones  {
 	}
 
 	
+	
+	/**
+	 * Cadena representa una fecha y horas válidas en españa, con el formato dd/mm/aaaa hh:mm:ss
+	 * @param type $cadena
+	 * @return boolean
+	 */
+	public static function errores_fecha_hora($cadena){
+		$mensaje="";
+		if ($cadena!=null) {
+			$cadena=str_replace(array(' ', '-', '.', ',', ':'), '/', $cadena);
+			/* Para que sea mas facil y ahorrar comprobaciones cambiamos por / todos los signos que pone en el array, de esta manera la fecha siempre sera del tipo dd/mm/aaaa */
+//			$patron_fecha_hora="/^\d{1,2}\/\d{1,2}\/\d{4}\/\d{2}\/\d{2}\/\d{2}/";
+                        $patron_fecha="/^\d{1,2}\/\d{1,2}\/\d{4}/";
+                        $patron_fecha_americana="/^\d{4}\/\d{1,2}\/\d{1,2}/";
+                        print_r($cadena);
+			$encuentros=array();
+			if (preg_match($patron_fecha, $cadena) || preg_match($patron_fecha_americana, $cadena)) {
+//				$numeros = explode('/', $encuentros[0]); //con explode convertimos en subcadenas el array cadena, cada subcadena esta formada por la division que hace el caracter.
+				$numeros = explode('/', $cadena);
+//				if (!mktime ($numeros[3], $numeros[4], $numeros[5], $numeros[1], $numeros[0], $numeros[2]))
+                                if (!mktime ("0","0","0",$numeros[1], $numeros[0], $numeros[2]))
+					$mensaje="La fecha  {$encuentros[0]} es errónea . Revísela. ";
+
+			}
+			else
+				$mensaje="La fecha es errónea. Revísela. ";
+		}
+		if ($mensaje=="") $mensaje=false;
+		return $mensaje;
+	}
+
+	
+	
 
 	/**
 	 * Identificador de variables o de claves internas. Solo letras, números y _. NO puede empezar por número
@@ -385,7 +417,7 @@ class Validaciones  {
 					$valores_aportados.=" , ";
 				}
 			}
-			$filas = \datos\Datos_SQL::select($parametros, $tabla);
+			$filas = \modelos\Datos_SQL::select($parametros, $tabla);
 			if ($filas && count($filas))
 				$mensaje.="El/Los valor/es aportado/s <b>[ $valores_aportados ]</b> ya existe/n en la base de datos. Escribe un valor no existente.";
 		}
@@ -429,7 +461,7 @@ class Validaciones  {
 				}
 			}
 			$parametros["where"].=")";
-			$filas = \datos\Datos_SQL::select($parametros, $tabla);
+			$filas = \modelos\Datos_SQL::select($parametros, $tabla);
 			if ($filas && count($filas))
 				$mensaje.="El/Los valor/es aportado/s <b>[ $valores_aportados ]</b> ya existe/n en la base de datos en otra fila. Escribe un/os valor/es no existente/s.";
 		}
@@ -471,7 +503,7 @@ class Validaciones  {
 				}
 			}
 
-			$filas = \datos\Datos_SQL::select($parametros, $tabla);
+			$filas = \modelos\Datos_SQL::select($parametros, $tabla);
 			if ( ! $filas || ! count($filas)) {
 				$mensaje.="El/Los valor/es aportado/s <b>[ $valores_aportados ]</b> no existe/n en la tabla de referencia [$tabla] en las columnas [{$parametros["where"]}] . Escribe un valor que sí exista.";
 			}
@@ -502,8 +534,76 @@ class Validaciones  {
 	);
 
 	
+	
+	
+	/**
+	 * Un login_valido
+	 * Entre 4 y 20 caracteres
+	 * letras y números, sin números al principio
+	 * @param string $cadena
+	 */
+	public static function errores_login($cadena=null) {
+		
+		$mensaje = null;
+		if ($cadena != null && strlen($cadena)>0 ) {
+			$patron = '/^[a-z]{1}[a-z0-9]{3,19}$/i';
+			if ( ! preg_match($patron, $cadena)) {
+				$mensaje.="Contiene carcateres no válidos. Sólo se admiten letras y números, y no puede comenzar por número, su longitud es menor de 4 o mayor de 20 caracteres. ";
+			}
+		}
+		return $mensaje;
+	}
+
+	/**
+	 * Una constraseña válida
+	 * Entre 6 y 20 letras y números
+	 * debe contener como mínimo 2 números.
+	 *
+	 * @param string $cadena
+	 * @return boolean|string
+	 */
+	public static function errores_password($cadena=null) {
+		
+		$mensaje = null;
+		if ($cadena != null && strlen($cadena)>0) {
+			$patron = '/^[a-z0-9@#&]{6,20}$/i';
+			$encuentros = array();
+			if ( ! preg_match($patron, $cadena)) {
+				$mensaje .= "Contiene carcteres no válidos. Solo se admiten letras, números y @#& o su longitud no está entre 6 y 20 caracteres . ";
+			}
+			else {
+				$patron = '/\d/i';
+				if (preg_match_all($patron, $cadena, $encuentros) < 2) 
+					$mensaje .= " Como mínimo debe haber dos números.";	
+				$patron = '/[a-z]/i';
+				if (preg_match_all($patron, $cadena, $encuentros) < 2 ) 
+					$mensaje .= " Como mínimo debe haber dos letras.";	
+			}
+		}
+		return $mensaje;
+		
+	}
+
+	
+	public static function errores_email($cadena) {
+		$mensaje = null;
+		if($cadena!=null) {
+			$patron= '/^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
+			$encontrados=array();
+			if(preg_match($patron, $cadena, $encontrados)) { // Hay encuentros
+				if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
+				if ($cadena!=$encontrados[0])
+					$mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
+			}
+			else {
+				if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
+				$mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
+			}
+		}
+		
+		return $mensaje;
+
+	} // Fin método
+
 
 } // Fin de la clase
-
-
-?>
