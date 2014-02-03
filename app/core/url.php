@@ -77,6 +77,12 @@ class URL {
 			return URL_ROOT.((\core\Configuracion::$url_amigable) ? self::amigable($query_string, $withLang) : self::query_string($query_string, $withLang));
 
 	}
+        
+        static function http_generar($query_string = array(), $withLang = true, $withLang = true) {
+		
+		return self::generar($query_string, $withLang, $withLang);
+		
+	}
 		
 	
 	static function generar_con_idioma($query_string = array()) {

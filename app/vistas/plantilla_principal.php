@@ -15,28 +15,84 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT; ?>recursos/css/inicio/principal.css" />
 
+        <script src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/jquery/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/f_cookies_v06.js"></script>
-	<script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/idiomas.js"></script>
+        <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/idiomas.js"></script>
+        <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/general.js"></script>
     </head>
 
     <body>
+        
+<!--        <div id='idiomas'>
+            <a  onclick='set_lang("es", "<?php echo \core\URL::generar_sin_idioma("inicio/index"); ?>");' ><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_es.jpg' height='25px' /><?php echo \core\Idioma::text("Español", "plantilla_principal"); ?></a>
+            <a  onclick='set_lang("en", "<?php echo \core\URL::generar_sin_idioma("en/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_en.jpg' height='25px' /><?php echo \core\Idioma::text("Inglés", "plantilla_principal"); ?></a>
+            <a  onclick='set_lang("fr", "<?php echo \core\URL::generar_sin_idioma("Fr/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_fr.jpg' height='25px' /><?php echo \core\Idioma::text("Francés", "plantilla_principal"); ?></a>
+            <a  onclick='set_lang("it", "<?php echo \core\URL::generar_sin_idioma("it/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_it.jpg' height='25px' /><?php echo \core\Idioma::text("Italiano", "plantilla_principal"); ?></a>
+        </div>-->
+        
         <div id="encabezado">
             <img src="<?php echo URL_ROOT; ?>recursos/imagenes/inicio/logo.jpg" alt="logo" title="Logo"/>
             <h1 id="titulo"><?php echo \core\Idioma::text("Titulo", "plantilla_principal"); ?></h1>
         </div>
+
         
-        <div id='idiomas'>
-			<a  onclick='set_lang("es", "<?php echo \core\URL::generar_sin_idioma("inicio/index"); ?>");' ><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_es.jpg' height='25px' /><?php echo \core\Idioma::text("Español", "plantilla_principal"); ?></a>
-			<a  onclick='set_lang("en", "<?php echo \core\URL::generar_sin_idioma("en/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_en.jpg' height='25px' /><?php echo \core\Idioma::text("Inglés", "plantilla_principal"); ?></a>
-                        <a  onclick='set_lang("fr", "<?php echo \core\URL::generar_sin_idioma("Fr/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_fr.jpg' height='25px' /><?php echo \core\Idioma::text("Francés", "plantilla_principal"); ?></a>
-                        <a  onclick='set_lang("it", "<?php echo \core\URL::generar_sin_idioma("it/inicio/index"); ?>");'><img src='<?php echo \core\URL::generar_sin_idioma("recursos/imagenes/idiomas"); ?>flag_it.jpg' height='25px' /><?php echo \core\Idioma::text("Italiano", "plantilla_principal"); ?></a>
-	</div>
 
         <hr width="100%" color="#3e779d" size="5"/>
 
         <div id="cuerpo" align="center">
-            <a href="<?php echo \core\URL::generar_con_idioma("libros/index"); ?>" title="Libros"><button id="biblioteca"><?php echo \core\Idioma::text("Biblioteca", "plantilla_principal"); ?><br><img src="<?php echo URL_ROOT; ?>recursos/imagenes/libros/leer.png" width="27%"/></button></a>
-            <a href="<?php echo \core\URL::generar_con_idioma("crocs/index"); ?>" title="Crocs"><button id="crocs">Crocs<br><img src="<?php echo URL_ROOT; ?>recursos/imagenes/crocs/logo.jpg" width="35%"/></button></a>
+            <a href="<?php echo \core\URL::generar_con_idioma("crocs/index"); ?>" title="Crocs"><button id="crocs">Crocs<br><img src="<?php echo URL_ROOT; ?>recursos/imagenes/crocs/logo.jpg" width="70%"/></button></a>
+        </div>
+
+        <hr width="100%" color="#3e779d" size="5"/>
+
+        <div style="width: 65%; text-align: left; margin-left: 15px;" align="center">
+            
+            <h2><b>Introducción</b></h2>
+            <p>
+                De la lectura de http://en.wikipedia.org/wiki/Create,_read,_update_and_delete<br>
+                <i>In Database applications, the acronym CRUD refers to all of the major functions that are
+                implemented in relational database applications. Each letter in the acronym can map to a
+                standard SQL statement and HTTP method:</i><br>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>SQL</th>
+                        <th>HTTP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Create</td>
+                        <td>INSERT</td>
+                        <td>PUT / POST</td>
+                    </tr>
+                    <tr>
+                        <td>Read (Retrieve)</td>
+                        <td>SELECT</td>
+                        <td>GET</td>
+                    </tr>
+                    <tr>
+                        <td>Update (Modif.)</td>
+                        <td>UPDATE</td>
+                        <td>PUT / PATCH</td>
+                    </tr>
+                    <tr>
+                        <td>Delete (Destroy)</td>
+                        <td>DELETE</td>
+                        <td>DELETE</td>
+                    </tr>
+                </tbody>
+            </table><br>
+                Hasta ahora ya somos capaces de manejar todos los comandos SQL y también de enviar peticiones
+                HTTP al servidor utilizando comandos POST y GET.
+            </p>
+            <h2><b>Objetivo</b></h2>
+            <p>
+                Hacer el mantenimiento (altas, bajas, consultas y modificaciones de filas) de una tabla de datos
+                alojada en mysql con ayuda de una aplicación web escrita en php siguiendo el modelo vista
+                controlador.
+            </p>
         </div>
 
         <hr width="100%" color="#3e779d" size="5"/>
@@ -44,7 +100,7 @@
         <div id="pie" align="center">
             <h2><?php echo \core\Idioma::text("Creado por", "plantilla_principal"); ?> Marina Soler ---- <?php echo \core\Idioma::text("Contacto", "plantilla_principal"); ?>: <a href="mailto:msolermolpeceres@gmail.com">msolermolpeceres@gmail.com</a></h2>
             <h3><?php echo \core\Idioma::text("Creación", "plantilla_principal"); ?>: 29<?php echo \core\Idioma::text("Octubre", "plantilla_principal"); ?>2013.</h3>
-            <h3><?php echo \core\Idioma::text("Última Actualización", "plantilla_principal"); ?>: 16<?php echo \core\Idioma::text("Diciembre", "plantilla_principal"); ?>2013.</h3>
+            <h3><?php echo \core\Idioma::text("Última Actualización", "plantilla_principal"); ?>: 03<?php echo \core\Idioma::text("Febrero", "plantilla_principal"); ?>2013.</h3>
         </div>
 
     </body>

@@ -63,7 +63,7 @@ table, th, td{
     border-bottom-color: #732615;
 }
 
-button{
+.button{
     border-top: 1px solid #704b2e;
    background: #57d966;
    background: -webkit-gradient(linear, left top, left bottom, from(#369c14), to(#57d966));
@@ -90,7 +90,7 @@ button{
     width: 45%;
     padding: 5px 0px 5px 0px;
 }
-button:hover {
+.button:hover {
        border-top-color: #ad365d;
    background: #ad365d;
    color: #ccc;
@@ -98,7 +98,7 @@ button:hover {
     box-shadow: 5px 5px 5px #888888;
     text-shadow: 2px 2px 3px #000000;
 }
-button:active {
+.button:active {
     border-top-color: #1b435e;
     background: #1b435e;
 }

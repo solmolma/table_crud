@@ -48,11 +48,11 @@ class Configuracion {
 	
 	/*
 	public static $db = array(
-		'server'   => 'sql210.byethost8.com',
-		'user'     => 'b8_12128753',
-		'password' => '**************',
-		'dbname'   => 'b8_12128753_esmvcphp',
-		'prefix_'  => 'foro_'
+		'server'   => 'mysql.hostinger.es',
+		'user'     => 'u724569628_daw2',
+		'password' => 'datosdaw2',
+		'dbname'   => 'u724569628_daw2',
+		'prefix_'  => 'daw2_'
 	);
 	*/
 	/**

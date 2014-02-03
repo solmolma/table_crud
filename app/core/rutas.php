@@ -52,20 +52,30 @@ class Rutas {
 			
 			
 			if (isset($parametros[0])) {
+				if ($parametros[0] == "administrator") {
+					$_GET["administrator"] = strtolower($parametros[0]);
+					$_REQUEST["administrator"] = strtolower($parametros[0]);
+					array_shift($parametros); // Quitamos del array de encuentros el administrator
+				}
+			}
+                        
+                        if (isset($parametros[0])) {
 				$patron_idiomas = "/^(".\core\Configuracion::$idiomas_reconocidos.")$/i";
 				if (preg_match($patron_idiomas, $parametros[0])) {
 					$_GET["lang"] = strtolower($parametros[0]);
+					$_REQUEST["lang"] = strtolower($parametros[0]);
 					array_shift($parametros); // Quitamos del array de encuentros el idioma
 				}
 			}
 			
 			$patron[0] = "/^[\w\-]+$/i"; // controlador
 			$patron[1] = "/^[\w\-]+$/i"; // método
-			$patron[2] = "/^\w+.*/i"; // id y otros
+			$patron[2] = "/^[\w\-]+$/i"; // id
+			$patron[3] = "/.*/"; // id y otros
 			foreach ($parametros as $key => $value) {
 				// Si el parámetro se ha recibido no se añade
 				// Si lo añado, quito la / del inicio.
-				$patron_parametro = $key < 2 ? $patron[$key] : $patron[2];
+				$patron_parametro = $key < 3 ? $patron[$key] : $patron[3];
 				if (preg_match($patron_parametro, $value))
 					if ( ! isset($_GET["p".($key+1)]) ) $_GET["p".($key+1)] = $value;
 			}
@@ -84,6 +94,11 @@ class Rutas {
 		if ( ! isset($_REQUEST['id']) and isset($_GET['p3'])) {
 				$_POST['id'] = $_GET['p3'];
 				$_REQUEST['id'] = $_GET['p3'];
+		}
+                if ( ! isset($_REQUEST['key']) and isset($_GET['p4'])) {
+				$_GET['key'] = $_GET['p4'];
+				$_POST['key'] = $_GET['p4'];
+				$_REQUEST['key'] = $_GET['p4'];
 		}
 		
 //		echo "<pre>"; print_r($parametros); print_r($GLOBALS);exit(0);

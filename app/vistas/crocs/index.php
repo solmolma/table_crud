@@ -22,15 +22,14 @@
                                                 <td>{$crocs['talla']}</td>
                                                 <td>{$crocs['precio']}</td>
                                                 <td>{$crocs['temporada']}</td>
-                                                <td><a href='" . (\core\URL::generar_con_idioma("crocs/form_modificar/{$crocs['id']}")) . "'><button>" . (\core\Idioma::text("Modificar", "plantilla_crocs")) . "</button></a>
-                                                    <a href='" . (\core\URL::generar_con_idioma("crocs/form_borrar/{$crocs['id']}")) . "'><button>" . (\core\Idioma::text("Borrar", "plantilla_crocs")) . "</button></td></a>
+                                                <td>".\core\HTML_Tag::a_boton_onclick("button",array ("crocs","form_modificar",$crocs['id']),"Modificar")." ".\core\HTML_Tag::a_boton_onclick("button",array ("crocs","form_borrar",$crocs['id']),"Borrar")."</td>
                                         </tr>";
             }
             ?>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7"><button style="float: right; width: 100px; margin-right: 20px" onclick='window.location.assign("<?php echo \core\URL::generar_con_idioma("crocs/form_anexar") ?>");'><?php echo \core\Idioma::text("Anexar", "plantilla_libros"); ?></button></td>
+                <td colspan="7"><button class="button" style="float: right; width: 100px; margin-right: 20px" onclick='window.location.assign("<?php echo \core\URL::generar_con_idioma("crocs/form_anexar") ?>");'><?php echo \core\Idioma::text("Anexar", "plantilla_libros"); ?></button></td>
             </tr>
         </tfoot>
 

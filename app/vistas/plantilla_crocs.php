@@ -16,6 +16,11 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT; ?>recursos/css/crocs/principal.css" />
 
+        <script src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/jquery/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/f_cookies_v06.js"></script>
+	<script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/idiomas.js"></script>
+        <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/general.js"></script>
+        
     </head>
 
     <body>
@@ -46,10 +51,14 @@
 
         <div id="pie" align="center">
             <h2><?php echo \core\Idioma::text("Creado por", "plantilla_principal"); ?> Marina Soler ---- <?php echo \core\Idioma::text("Contacto", "plantilla_principal"); ?>: <a href="mailto:msolermolpeceres@gmail.com">msolermolpeceres@gmail.com</a></h2>
-            <h3><?php echo \core\Idioma::text("Creación", "plantilla_principal"); ?>: 29<?php echo \core\Idioma::text("Octubre", "plantilla_principal"); ?>2013.</h3>
-            <h3><?php echo \core\Idioma::text("Última Actualización", "plantilla_principal"); ?>: 20<?php echo \core\Idioma::text("Enero", "plantilla_principal"); ?>2013.</h3>
+            <h3><?php echo \core\Idioma::text("Creación", "plantilla_principal"); ?>: 27<?php echo \core\Idioma::text("Enero", "plantilla_principal"); ?>2013.</h3>
+            <h3><?php echo \core\Idioma::text("Última Actualización", "plantilla_principal"); ?>: 03<?php echo \core\Idioma::text("Febrero", "plantilla_principal"); ?>2013.</h3>
         </div>
 
+        
+        <?php echo \core\HTML_Tag::post_request_form(); ?>
+        
+        
     </body>
 
 </html>

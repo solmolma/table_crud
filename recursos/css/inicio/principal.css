@@ -1,13 +1,15 @@
 h1#titulo {
     display: inline;
+    float: right;
+    margin-right: 25%;
 }
 
 #idiomas{
     text-align: center;
-    position: fixed; 
+    float:right;
     top: 10px; 
     right: 10px; 
-    width: 35%; 
+    width: 45%; 
 }
 
 #idiomas a{
@@ -47,30 +49,16 @@ button {
     font-family: Georgia, serif;
     text-decoration: none;
     vertical-align: middle;
-    width: 30%;
-}
-#tutorial:hover {
-    border-top-color: #4ba628;
-    background: #4ba628;
-    color: #91fc8f;
+    width: 35%;
 }
 
-#biblioteca:hover {
-    border-top-color: #732615;
-    background: #732615;
-    color: #FFAD33;
-}
-
-#musica:hover {
-    border-top-color: #0015ff;
-    background: #0015ff;
-    color: #FFAD33;
-}
-
-#peliculas:hover {
-    border-top-color: #eb5a17;
-    background: #eb5a17;
-    color: #FFAD33;
+button:hover {
+    border-top-color: #ad365d;
+    background: #ad365d;
+    color: #ccc;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px #888888;
+    text-shadow: 2px 2px 3px #000000;
 }
 
 button:active {
@@ -81,5 +69,4 @@ button:active {
 #cuerpo{
     width: 80%;
     margin-left: 13%;
-
 }
