@@ -48,12 +48,11 @@ class crocs extends \core\Controlador {
 
     public function form_modificar(array $datos = array()) {
 
-//		$datos["form_name"] = __FUNCTION__;
-
         $id = \core\HTTP_Requerimiento::request('id');
         $clausulas['where'] = "id = " . $id;
         $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
         $datos["values"] = $fila[0];
+        $datos["values"]['id'] = $id;
 
         $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
         $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
@@ -61,7 +60,6 @@ class crocs extends \core\Controlador {
     }
     
     public function form_modificar_validar(array $datos = array()) {
-        
         if (!isset($datos["errores"])) { // Si no es un reenvío desde una validación fallida
             $validaciones = array(
                 "nombre" => "errores_requerido && errores_texto"
@@ -75,20 +73,16 @@ class crocs extends \core\Controlador {
                 \core\Distribuidor::cargar_controlador('errores', 'index', $datos);
                 return;
             } else {
-                $clausulas['where'] = " id = {$datos['values']['id']} ";
-                if (!$filas = \modelos\Datos_SQL::select($clausulas, 'crocs')) {
-                    $datos['mensaje'] = 'Error al recuperar la fila de la base de datos';
-                    \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
-                    return;
-                } else {
-                    $datos['values'] = $filas[0];
-                }
+                $id = \core\HTTP_Requerimiento::request('id');
+                $clausulas['where'] = " id = ".$id;
+                $datos['values']['precio'] = \core\Conversiones::decimal_coma_a_punto($datos['values']['precio']);
+                \modelos\Datos_SQL::table("crocs")->update($datos['values'],"crocs",$clausulas['where']);
+                
             }
         }
         
-        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-        $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
-        \core\HTTP_Respuesta::enviar($http_body);
+        \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar_con_idioma("crocs/index"));
+        \core\HTTP_Respuesta::enviar();
         
     }
     

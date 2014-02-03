@@ -288,7 +288,7 @@ class mysqli implements \core\sgbd\SQL_interface {
 			$where
 		;
 		";
-		
+                
 		return self::execute($sql);
 	}
 	
