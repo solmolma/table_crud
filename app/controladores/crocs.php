@@ -9,7 +9,6 @@ class crocs extends \core\Controlador {
      * de la consulta a la base de datos.
      * @param array $datos
      * @author Marina Soler Molpeceres
-     * @method table(), generar(), enviar()
      */
     public function index(array $datos = array()) {
 
@@ -75,20 +74,15 @@ class crocs extends \core\Controlador {
      */
     public function form_modificar(array $datos = array()) {
 
-        if (!\core\HTTP_Requerimiento::post("id") || \core\HTTP_Requerimiento::get('id')) {
-            $datos["mensaje"] = "URL Incorrecta. Por favor reescriba la direccion.";
-            \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
-        } else {
-            $id = \core\HTTP_Requerimiento::request('id');
-            $clausulas['where'] = "id = " . $id;
-            $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
-            $datos["values"] = $fila[0];
-            $datos["values"]['id'] = $id;
+        $id = \core\HTTP_Requerimiento::request('id');
+        $clausulas['where'] = "id = " . $id;
+        $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
+        $datos["values"] = $fila[0];
+        $datos["values"]['id'] = $id;
 
-            $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-            $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
-            \core\HTTP_Respuesta::enviar($http_body);
-        }
+        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+        $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
+        \core\HTTP_Respuesta::enviar($http_body);
     }
 
     /**
@@ -154,7 +148,7 @@ class crocs extends \core\Controlador {
      * para eliminar el registro de la base de datos.
      * @param array $datos
      * @author Marina Soler Molpeceres
-     */    
+     */
     public function form_borrar_validar(array $datos = array()) {
 
         $id = \core\HTTP_Requerimiento::request('id');

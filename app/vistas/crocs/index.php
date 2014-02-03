@@ -1,15 +1,15 @@
 <div id='crocs'>
-    <h1><?php echo \core\Idioma::text("Ultimos", "plantilla_crocs"); ?></h1>
+    <h1>-- Listado de Crocs --</h1>
     <table align="center"   border='1px'>
         <thead>
             <tr>
-                <th><?php echo \core\Idioma::text("Referencia", "plantilla_crocs"); ?></th>
-                <th><?php echo \core\Idioma::text("Nombre", "plantilla_crocs"); ?></th>
+                <th>Referencia</th>
+                <th>Nombre</th>
                 <th>Color</th>
                 <th>Talla</th>
-                <th><?php echo \core\Idioma::text("Precio", "plantilla_crocs"); ?></th>
+                <th>Precio</th>
                 <th>Temporada</th>
-                <th><?php echo \core\Idioma::text("Acciones", "plantilla_crocs"); ?></th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7"><button class="button" style="float: right; width: 100px; margin-right: 20px" onclick='window.location.assign("<?php echo \core\URL::generar_con_idioma("crocs/form_anexar") ?>");'><?php echo \core\Idioma::text("Anexar", "plantilla_libros"); ?></button></td>
+                <td colspan="7"><button class="button" style="float: right; width: 100px; margin-right: 20px" onclick='window.location.assign("<?php echo \core\URL::generar("crocs/form_anexar") ?>");'>Anexar</button></td>
             </tr>
         </tfoot>
 

@@ -17,6 +17,7 @@ class Distribuidor {
 	 */
 	public static function estudiar_query_string() {		
 		
+            if (!isset($_GET['p3']) && !isset($_GET['p4'])){
 		$controlador = isset($_GET['menu']) ? \core\HTTP_Requerimiento::get('menu') : \core\HTTP_Requerimiento::get('p1');
 		$metodo = isset($_GET['submenu']) ?\core\HTTP_Requerimiento::get('submenu'): \core\HTTP_Requerimiento::get('p2');		
 		
@@ -26,7 +27,10 @@ class Distribuidor {
 			$metodo = strtolower(\core\Configuracion::$metodo_por_defecto);
 		
 		self::cargar_controlador($controlador, $metodo);
-		
+            }else{
+                $datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+                \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
+            }
 	}
 	
 	
