@@ -62,8 +62,7 @@ class crocs extends \core\Controlador {
             $datos["errores"]["errores_validacion"] = "Corrige los errores.";
         else {
             $datos['values']['precio'] = \core\Conversiones::decimal_coma_a_punto($datos['values']['precio']);
-            $datos['values']['temporada'] = \core\Conversiones::fecha_europea_a_mysql($datos['values']['temporada']);
-            if (!$validacion = \modelos\Modelo_SQL::table("crocs")->insert($datos['values'])) /* insert($datos["values"], 'crocs')) */ // Devuelve true o false
+          if (!$validacion = \modelos\Modelo_SQL::table("crocs")->insert($datos['values'])) /* insert($datos["values"], 'crocs')) */ // Devuelve true o false
                 $datos["errores"]["errores_validacion"] = "No se han podido grabar los datos en la bd.";
         }
         if (!$validacion) { //Devolvemos el formulario para que lo intente corregir de nuevo
@@ -91,9 +90,6 @@ class crocs extends \core\Controlador {
             $datos["values"] = $fila[0];
             $datos["values"]['id'] = $id;
 
-            $fecha_europea = \core\Conversiones::fecha_americana_a_europea($datos['values']['temporada']);
-            $datos['values']['temporada'] = $fecha_europea;
-            
             $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
             $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
             \core\HTTP_Respuesta::enviar($http_body);
