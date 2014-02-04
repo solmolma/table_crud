@@ -61,13 +61,13 @@ class Distribuidor {
 				
 			}
 			else {
-				$datos['mensaje'] = "El método <b>$metodo</b> no está definido en la clase <b>$controlador_clase</b> (.php).";
-				self::cargar_controlador("errores", "error_404", $datos);
+				$datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+				self::cargar_controlador("errores", "index", $datos);
 			}
 		}
 		else {
-			$datos['mensaje'] = "La clase <b>$controlador_clase</b> no existe.";
-			self::cargar_controlador("errores", "error_404", $datos);
+			$datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+			self::cargar_controlador("errores", "index", $datos);
 		}
 	}
 	

@@ -62,6 +62,7 @@ class crocs extends \core\Controlador {
             $datos["errores"]["errores_validacion"] = "Corrige los errores.";
         else {
             $datos['values']['precio'] = \core\Conversiones::decimal_coma_a_punto($datos['values']['precio']);
+            $datos['values']['temporada'] = \core\Conversiones::fecha_europea_a_mysql($datos['values']['temporada']);
             if (!$validacion = \modelos\Modelo_SQL::table("crocs")->insert($datos['values'])) /* insert($datos["values"], 'crocs')) */ // Devuelve true o false
                 $datos["errores"]["errores_validacion"] = "No se han podido grabar los datos en la bd.";
         }
@@ -84,14 +85,22 @@ class crocs extends \core\Controlador {
     public function form_modificar(array $datos = array()) {
 
         $id = \core\HTTP_Requerimiento::request('id');
-        $clausulas['where'] = "id = " . $id;
-        $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
-        $datos["values"] = $fila[0];
-        $datos["values"]['id'] = $id;
+        if ($id) {
+            $clausulas['where'] = "id = " . $id;
+            $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
+            $datos["values"] = $fila[0];
+            $datos["values"]['id'] = $id;
 
-        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-        $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
-        \core\HTTP_Respuesta::enviar($http_body);
+            $fecha_europea = \core\Conversiones::fecha_americana_a_europea($datos['values']['temporada']);
+            $datos['values']['temporada'] = $fecha_europea;
+            
+            $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+            $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
+            \core\HTTP_Respuesta::enviar($http_body);
+        } else {
+            $datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+            \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
+        }
     }
 
     /**
@@ -112,25 +121,32 @@ class crocs extends \core\Controlador {
             );
 
             $id = \core\HTTP_Requerimiento::request('id');
-            $clausulas['where'] = " id = " . $id;
-            if (!$validacion = !\core\Validaciones::errores_validacion_request($validaciones, $datos)) {
-                $datos["errores"]["errores_validacion"] = "Corrige los errores.";
+            if ($id) {
+                $clausulas['where'] = " id = " . $id;
+                if (!$validacion = !\core\Validaciones::errores_validacion_request($validaciones, $datos)) {
+                    $datos["errores"]["errores_validacion"] = "Corrige los errores.";
+                } else {
+                    $datos['values']['id'] = $id;
+                    $datos['values']['precio'] = \core\Conversiones::decimal_coma_a_punto($datos['values']['precio']);
+                    \modelos\Datos_SQL::table("crocs")->update($datos['values'], "crocs", $clausulas['where']);
+                }
+                if (!$validacion) { //Devolvemos el formulario para que lo intente corregir de nuevo
+                    $datos['values']['id'] = $id;
+                    $datos['view_content'] = \core\Vista::generar("form_modificar", $datos);
+                    $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
+                    \core\HTTP_Respuesta::enviar($http_body);
+                } else {
+                    \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar("crocs/index"));
+                    \core\HTTP_Respuesta::enviar();
+                }
             } else {
-                $datos['values']['precio'] = \core\Conversiones::decimal_coma_a_punto($datos['values']['precio']);
-                \modelos\Datos_SQL::table("crocs")->update($datos['values'], "crocs", $clausulas['where']);
-            }
-            if (!$validacion) { //Devolvemos el formulario para que lo intente corregir de nuevo
-                $datos['view_content'] = \core\Vista::generar("form_modificar", $datos);
-                $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
-                \core\HTTP_Respuesta::enviar($http_body);
-            } else {
-                \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar("crocs/index"));
-                \core\HTTP_Respuesta::enviar();
+                $datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+                \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
             }
         }
 
-        \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar_con_idioma("crocs/index"));
-        \core\HTTP_Respuesta::enviar();
+//        \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar_con_idioma("crocs/index"));
+//        \core\HTTP_Respuesta::enviar();
     }
 
     /**
@@ -142,13 +158,18 @@ class crocs extends \core\Controlador {
     public function form_borrar(array $datos = array()) {
 
         $id = \core\HTTP_Requerimiento::request('id');
-        $clausulas['where'] = "id = " . $id;
-        $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
-        $datos["values"] = $fila[0];
+        if ($id) {
+            $clausulas['where'] = "id = " . $id;
+            $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
+            $datos["values"] = $fila[0];
 
-        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-        $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
-        \core\HTTP_Respuesta::enviar($http_body);
+            $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+            $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
+            \core\HTTP_Respuesta::enviar($http_body);
+        } else {
+            $datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+            \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
+        }
     }
 
     /**
@@ -161,13 +182,18 @@ class crocs extends \core\Controlador {
     public function form_borrar_validar(array $datos = array()) {
 
         $id = \core\HTTP_Requerimiento::request('id');
-        $clausulas['where'] = "id = " . $id;
-        $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
-        $datos["values"] = $fila[0];
-        \modelos\Datos_SQL::delete($datos["values"], 'crocs');
+        if ($id) {
+            $clausulas['where'] = "id = " . $id;
+            $fila = \modelos\Modelo_SQL::table("crocs")->select($clausulas);
+            $datos["values"] = $fila[0];
+            \modelos\Datos_SQL::delete($datos["values"], 'crocs');
 
-        \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar_con_idioma("crocs/index"));
-        \core\HTTP_Respuesta::enviar();
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar_con_idioma("crocs/index"));
+            \core\HTTP_Respuesta::enviar();
+        } else {
+            $datos['mensaje'] = "URL Incorrecta. Por favor corrige la direccion";
+            \core\HTTP_Respuesta::cargar_controlador("errores", "index", $datos);
+        }
     }
 
 }

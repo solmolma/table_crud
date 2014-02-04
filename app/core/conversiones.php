@@ -145,6 +145,34 @@ class Conversiones {
 			return $fecha_hora_es;
 		
 	}
+        
+        public static function fecha_americana_a_europea($cadena){
+            if ($cadena!=null) {
+			$cadena=str_replace(array(' ', '-', '.', ',', ':'), '/', $cadena);
+                        $patron_fecha_americana="/^\d{4}\/\d{2}\/\d{2}/";
+			$fecha=array();
+			if (preg_match($patron_fecha_americana, $cadena)) {
+                            $fecha = explode('/',$cadena);
+                            $fecha_europea = $fecha[2]."/".$fecha[1]."/".$fecha[0];
+                            return $fecha_europea;
+			}
+		}
+            
+        }
+        
+        public static function fecha_europea_a_mysql($cadena){
+            if ($cadena!=null) {
+			$cadena=str_replace(array(' ', '-', '.', ',', ':'), '/', $cadena);
+                        $patron_fecha_europea="/^\d{2}\/\d{2}/\d{4}/";
+			$fecha=array();
+			if (preg_match($patron_fecha_europea, $cadena)) {
+                            $fecha = explode('/',$cadena);
+                            $fecha_mysql = $fecha[2]."-".$fecha[1]."-".$fecha[0];
+                            return $fecha_mysql;
+			}
+		}
+            
+        }
 	
 	
 } // Fin de la clase

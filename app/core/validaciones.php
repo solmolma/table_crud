@@ -332,9 +332,8 @@ class Validaciones  {
 			$cadena=str_replace(array(' ', '-', '.', ',', ':'), '/', $cadena);
 			/* Para que sea mas facil y ahorrar comprobaciones cambiamos por / todos los signos que pone en el array, de esta manera la fecha siempre sera del tipo dd/mm/aaaa */
 //			$patron_fecha_hora="/^\d{1,2}\/\d{1,2}\/\d{4}\/\d{2}\/\d{2}\/\d{2}/";
-                        $patron_fecha="/^\d{1,2}\/\d{1,2}\/\d{4}/";
-                        $patron_fecha_americana="/^\d{4}\/\d{1,2}\/\d{1,2}/";
-                        print_r($cadena);
+                        $patron_fecha="/^\d{2}\/\d{2}\/\d{4}/";
+                        $patron_fecha_americana="/^\d{4}\/\d{2}\/\d{2}/";
 			$encuentros=array();
 			if (preg_match($patron_fecha, $cadena) || preg_match($patron_fecha_americana, $cadena)) {
 //				$numeros = explode('/', $encuentros[0]); //con explode convertimos en subcadenas el array cadena, cada subcadena esta formada por la division que hace el caracter.

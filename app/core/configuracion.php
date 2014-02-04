@@ -38,22 +38,22 @@ class Configuracion {
 	
 	
 
-//	public static $db = array(
-//		'server'   => 'localhost',
-//		'user'     => 'root',
-//		'password' => '',
-//		'db_name'  => 'daw2',
-//		'prefix_'  => ''
-//	);
-	
-	
 	public static $db = array(
-		'server'   => 'mysql.hostinger.es',
-		'user'     => 'u724569628_daw2',
-		'password' => 'datosdaw2',
-		'db_name'   => 'u724569628_daw2',
-		'prefix_'  => 'daw2_'
+		'server'   => 'localhost',
+		'user'     => 'root',
+		'password' => '',
+		'db_name'  => 'daw2',
+		'prefix_'  => ''
 	);
+	
+	
+//	public static $db = array(
+//		'server'   => 'mysql.hostinger.es',
+//		'user'     => 'u724569628_daw2',
+//		'password' => 'datosdaw2',
+//		'db_name'   => 'u724569628_daw2',
+//		'prefix_'  => 'daw2_'
+//	);
 	
 	/**
 	 * Define array llamado recursos_y_suariosla con la definición de todos los permisos de acceso a los recursos de la aplicación.
