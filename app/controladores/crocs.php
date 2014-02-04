@@ -2,6 +2,13 @@
 
 namespace controladores;
 
+/**
+ * Clase controladora de la página que muestra todo lo referente a las Crocs.
+ * Se encarga de hacer todas las validaciones de adicion, modificacion o borrado
+ * de datos.
+ * @package controladores
+ * @author Marina Soler Molpeceres <msolermolpeceres@gmail.com>
+ */
 class crocs extends \core\Controlador {
 
     /**
@@ -59,7 +66,9 @@ class crocs extends \core\Controlador {
                 $datos["errores"]["errores_validacion"] = "No se han podido grabar los datos en la bd.";
         }
         if (!$validacion) { //Devolvemos el formulario para que lo intente corregir de nuevo
-            \core\Distribuidor::cargar_controlador('crocs', 'form_anexar', $datos);
+            $datos['view_content'] = \core\Vista::generar("form_anexar", $datos);
+            $http_body = \core\Vista_Plantilla::generar('plantilla_crocs', $datos);
+            \core\HTTP_Respuesta::enviar($http_body);
         } else {
             \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar("crocs/index"));
             \core\HTTP_Respuesta::enviar();

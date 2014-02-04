@@ -1,6 +1,11 @@
 <?php
 namespace modelos;
 
+/**
+ * Clase que contiene el nombre de la tabla y las respectivas operaciones de la
+ * gestion de la misma.
+ * @author Marina Soler Molpeceres <msolermolpeceres@gmail.com>
+ */
 class crocs extends \core\sgbd\bd {
 
 public static $tabla = 'crocs';
